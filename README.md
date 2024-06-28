@@ -17,4 +17,4 @@ Conditions:
 
 Minimum numbers of players 2, maximum number of players should not exceed the maximum count of chords in the sequence, but we recommend to not involve more than 7 players (dwarf preferably)
 
-> Demo link 
+> Demo link [https://mandymozart.github.io/modulate-and-commit-I/](https://mandymozart.github.io/modulate-and-commit-I/)
