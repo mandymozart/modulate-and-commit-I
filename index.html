@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Chord Sequence</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      #chord-display {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <label for="num-players">Number of Players: </label><br />
+      <input
+        type="number"
+        id="num-players"
+        min="1"
+        max="7"
+        value="2" />
+    </div>
+    <div id="player-display">Player: All</div>
+    <div id="chord-display">Click to start</div>
+    <button id="next-chord-btn">Commit</button>
+
+    <script>
+      const sequence = [
+        'Dm',
+        'C',
+        'Eb',
+        'Dm',
+        'Em',
+        'F',
+        'EM',
+        'F',
+        'G',
+        'Am',
+        'Bb',
+        'Dm',
+        'Dmadd2',
+        'Dm',
+        'C',
+        'Eb',
+        'D',
+        'Em',
+        'F',
+        'Em',
+        'F',
+        'G',
+        'Am',
+        'Bb',
+        'Dm',
+      ];
+
+      let currentChordIndex = 0;
+      let previousPlayerIndex = -1;
+
+      document
+        .getElementById('next-chord-btn')
+        .addEventListener('click', () => {
+          const chordDisplay = document.getElementById('chord-display');
+          const playerDisplay = document.getElementById('player-display');
+          const numPlayers = parseInt(
+            document.getElementById('num-players').value,
+            10,
+          );
+
+          if (currentChordIndex < sequence.length) {
+            chordDisplay.textContent = sequence[currentChordIndex];
+            let randomPlayerIndex;
+
+            if (numPlayers === 1) {
+              randomPlayerIndex = 0; // If there's only one player, always choose player 1
+            } else {
+              do {
+                randomPlayerIndex = Math.floor(Math.random() * numPlayers);
+              } while (randomPlayerIndex === previousPlayerIndex);
+            }
+
+            previousPlayerIndex = randomPlayerIndex;
+            playerDisplay.textContent = `Player: ${randomPlayerIndex + 1}`;
+            currentChordIndex++;
+          } else {
+            chordDisplay.textContent = 'All chords have been displayed';
+            playerDisplay.textContent = 'Player: -';
+            currentChordIndex = 0; // Reset to start over if needed
+            previousPlayerIndex = -1;
+          }
+        });
+    </script>
+  </body>
+</html>
